@@ -6,47 +6,57 @@ public class Calc {
 	public static final int JUNIOR = 1;
 	public static final int SENIOR = 2;
 	public static final int SPECIALIST = 3;
+	public static final int MINHOURS = 8;
+	public static final int MINSPECIALISTHOURS = 9;
+	public static final int JUNIORPAYPERHOUR = 10;
+	public static final int SENIORPAYPERHOUR = 15;
+	public static final int SPECIALISTPAYPERHOUR = 22;
+	public static final int OVERTIMEMULTIPLIER = 2;
+	public static final int SPECIALISTOVERTIMEMULTIPLIER = 3;
+	public static final int JUNIORBONUS = 10;
+	public static final int SENIORBONUS = 20;
+	public static final int SPECIALISTBONUS = 30;
+	public static final int HEROBONUSHOURS = 20;
 
 	// my crappy screen test
 	public static void main(final String[] args) {
-		Calc calc = new Calc();
-		System.err.println(calc.pay(SPECIALIST, 3) + " should be 66");
+		//todo
 	}
 
-	private int payJunior(final int hours) {
+	public static int payJunior(final int hours) {
 		int Sum = 0;
-		if (hours > 8) { // if longer than eight hours
-			Sum = 10 * (hours - 8) * 2; // double pay
-			Sum += 10 * 8;
+		if (hours > MINHOURS) { // if longer than eight hours
+			Sum = JUNIORPAYPERHOUR * (hours - MINHOURS) * OVERTIMEMULTIPLIER; // double pay
+			Sum += JUNIORPAYPERHOUR * MINHOURS;
 		} else {
-			Sum += 10 * hours;
+			Sum += JUNIORPAYPERHOUR * hours;
 		}
 		return Sum;
 	}
 
-	private int paySenior(final int hours) {
+	public static int paySenior(final int hours) {
 		int Sum = 0;
-		if (hours > 8) { // if longer than eight hours
-			Sum = 15 * (hours - 8) * 2; // double pay
-			Sum += 15 * 8;
+		if (hours > MINHOURS) { // if longer than eight hours
+			Sum = SENIORPAYPERHOUR * (hours - MINHOURS) * OVERTIMEMULTIPLIER; // double pay
+			Sum += SENIORPAYPERHOUR * MINHOURS;
 		} else {
-			Sum += 15 * hours;
+			Sum += SENIORPAYPERHOUR * hours;
 		}
 		return Sum;
 	}
 
-	private int paySpecialist(final int hours) {
+	public static int paySpecialist(final int hours) {
 		int Sum = 0;
-		if (hours > 9) { // if longer than nine hours
-			Sum = 22 * (hours - 9) * 3; // triple pay after 9 hours
-			Sum += 22 * 9;
+		if (hours > MINSPECIALISTHOURS) { // if longer than nine hours
+			Sum = SPECIALISTPAYPERHOUR * (hours - MINSPECIALISTHOURS) * SPECIALISTOVERTIMEMULTIPLIER; // triple pay after 9 hours
+			Sum += SPECIALISTPAYPERHOUR * MINSPECIALISTHOURS;
 		} else {
-			Sum += 22 * hours;
+			Sum += SPECIALISTPAYPERHOUR * hours;
 		}
 		return Sum;
 	}
 
-	protected int pay(final int type, final int hours) {
+	public static int pay(final int type, final int hours) {
 		int Sum = 0;
 		switch (type) {
 		case JUNIOR:
@@ -63,18 +73,18 @@ public class Calc {
 		return Sum;
 	}
 
-	private int payHeroBonus(int type, int hours) {
+	public static int payHeroBonus(int type, int hours) {
 		int Sum = 0;
-		if (hours > 20) {
+		if (hours > HEROBONUSHOURS) {
 			switch (type) {
 			case JUNIOR:
-				Sum += 10;
+				Sum += JUNIORBONUS;
 				break;
 			case SENIOR:
-				Sum += 20;
+				Sum += SENIORBONUS;
 				break;
 			case SPECIALIST:
-				Sum += 30;
+				Sum += SPECIALISTBONUS;
 				break;
 			}
 		}
